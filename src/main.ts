@@ -42,6 +42,10 @@ console.log("Пользователь валиден?", buyer.isValid());
 buyer.email = "new@mail.com";
 console.log("После изменения email:", buyer.userInfo);
 
+buyer.phone = "";
+console.log("После изменения phone:", buyer.userInfo);
+console.log("Пользователь валиден?", buyer.isValid());
+
 buyer.clearInfo();
 console.log("После очистки данных:", buyer.userInfo);
 console.log("Пользователь валиден после очистки?", buyer.isValid());

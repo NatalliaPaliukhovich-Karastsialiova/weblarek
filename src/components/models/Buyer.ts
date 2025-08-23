@@ -57,12 +57,17 @@ export class Buyer implements IBuyer {
     this._payment = "";
   }
 
-  isValid(): boolean {
-    return (
-      this._email !== "" &&
-      this._phone !== "" &&
-      this._address !== "" &&
-      this._payment !== ""
-    );
+  isValid(): {
+    email: boolean;
+    phone: boolean;
+    address: boolean;
+    payment: boolean;
+  } {
+    return {
+      email: this._email.trim() !== "",
+      phone: this._phone.trim() !== "",
+      address: this._address.trim() !== "",
+      payment: this._payment !== ""
+    };
   }
 }

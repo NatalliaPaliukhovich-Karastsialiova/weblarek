@@ -226,7 +226,7 @@ error: string;
 `set address(value: string): void` - setter устанавливает address.
 `set phone(value: string): void` - setter устанавливает phone.
 `set payment(value: "cash" | "card" | ""): void` - setter устанавливает payment.
-`isValid(): boolean` - возвращает результат валидации данных пользователя.
+`isValid(): { email: boolean; phone: boolean; address: boolean; payment: boolean }` - возвращает объект с валидациями всех полей пользователя.
 `clearInfo(): void` - очищение данных пользователя.
 
 ### Слой коммуникации

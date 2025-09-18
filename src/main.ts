@@ -213,6 +213,7 @@ eventBroker.on("product:added", (obj: { id: string }) => {
   if (selectedProduct && !cart.isExist(id)) {
     cart.addProduct(selectedProduct);
     openPreview(selectedProduct, false);
+    modalView.close();
   }
 });
 
@@ -222,6 +223,7 @@ eventBroker.on("product:deleted", (obj: { id: string }) => {
   if (selectedProduct && cart.isExist(id)) {
     cart.deleteProduct(id);
     openPreview(selectedProduct, false);
+    modalView.close();
   }
 });
 

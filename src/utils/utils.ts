@@ -69,6 +69,19 @@ export function getObjectProperties(obj: object, filter?: (name: string, prop: P
         .map(([name, prop]) => name);
 }
 
+// View helpers
+import { CDN_URL, categoryMap } from "./constants";
+
+export function toCdnImage(path: string): string {
+    return `${CDN_URL}${path?.replace('.svg', '.png')}`;
+}
+
+export function applyCategoryClass(el: HTMLElement, category: string) {
+    Object.values(categoryMap).forEach(cls => el.classList.remove(cls));
+    const cls = categoryMap[category];
+    if (cls) el.classList.add(cls);
+}
+
 /**
  * Устанавливает dataset атрибуты элемента
  */

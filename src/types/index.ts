@@ -42,3 +42,34 @@ export interface IOrderResult {
 export interface IOrderFailed {
   error: string;
 }
+
+export interface IModal {
+  content: HTMLElement;
+}
+
+export interface IHeader {
+  counter: number;
+}
+
+export interface IGallery {
+  items: HTMLElement[];
+}
+
+export interface IBasket {
+  items: HTMLElement[];
+  total: number;
+}
+
+export interface IBaseCard {
+  title: string;
+  price: number | null;
+  id: string;
+}
+
+export interface ICard {
+  image: string;
+  title: string;
+  category: string;
+  price: number | null;
+  id: string;
+}

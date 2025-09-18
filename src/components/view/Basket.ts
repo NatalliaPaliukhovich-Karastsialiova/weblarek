@@ -26,15 +26,27 @@ export class Basket extends Component<IBasket> {
 
     this.makeOrderButton.addEventListener("click", (e) => {
       e.preventDefault();
-      events.emit("cart:make-order");
+      this.events.emit("cart:make-order");
     });
   }
 
   set items(items: HTMLElement[]) {
-    this.listElement.replaceChildren(...items);
+    if (!items || items.length === 0) {
+      const emptyItem = document.createElement("li");
+      emptyItem.className = "basket__empty";
+      emptyItem.textContent = "Корзина пуста";
+      this.listElement.replaceChildren(emptyItem);
+      this.makeOrderButton.disabled = true;
+      this.makeOrderButton.classList.add("button_disabled");
+      this.total = 0;
+    } else {
+      this.listElement.replaceChildren(...items);
+      this.makeOrderButton.disabled = false;
+      this.makeOrderButton.classList.remove("button_disabled");
+    }
   }
 
   set total(value: number | null) {
-    this.totalPrice.textContent = value ? `${value} синапсисов` : "Бесценно";
+    this.totalPrice.textContent = value !== null ? `${value} синапсисов` : "Бесценно";
   }
 }

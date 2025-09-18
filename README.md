@@ -253,6 +253,9 @@ error: string;
 
 Отвечает за состояние страницы при открытии модальных окон.
 
+Конструктор:
+`constructor(container: HTMLElement)` — принимает корневой DOM-элемент страницы.
+
 Методы:
 `lock(): void` — добавляет класс блокировки прокрутки.
 `unlock(): void` — снимает блокировку.
@@ -260,6 +263,9 @@ error: string;
 #### Класс ModalDialog
 
 Управляет модальным окном: содержимым и открытием/закрытием.
+
+Конструктор:
+`constructor(container: HTMLElement, eventBroker: IEvents)` — принимает контейнер модалки и брокер событий.
 
 Поля класса:
 `content: HTMLElement` — сеттер заменяет содержимое модалки.
@@ -272,6 +278,9 @@ error: string;
 
 Шапка сайта с кнопкой корзины и счётчиком.
 
+Конструктор:
+`constructor(events: IEvents, container: HTMLElement)` — принимает брокер событий и контейнер шапки.
+
 Поля класса:
 `counter: number` — сеттер обновляет счётчик.
 
@@ -282,12 +291,18 @@ error: string;
 
 Контейнер каталога товаров.
 
+Конструктор:
+`constructor(container: HTMLElement)` — принимает контейнер галереи.
+
 Поля класса:
 `items: HTMLElement[]` — сеттер заменяет список карточек.
 
 #### Класс BaseCard
 
 Базовый класс карточек.
+
+Конструктор:
+`constructor(container: HTMLElement)` — принимает контейнер карточки.
 
 Поля класса:
 `title: string` — сеттер заголовка.
@@ -297,6 +312,9 @@ error: string;
 #### Класс GalleryCard (каталог)
 
 Карточка списка каталога.
+
+Конструктор:
+`constructor(container: HTMLElement, onSelect?: (id: string) => void)` — принимает контейнер карточки и необязательный обработчик выбора.
 
 Поля класса:
 `image: string` — устанавливает изображение товара.
@@ -308,6 +326,9 @@ error: string;
 #### Класс PreviewCard (превью)
 
 Карточка детального просмотра.
+
+Конструктор:
+`constructor(container: HTMLElement, onAction?: (id: string) => void)` — принимает контейнер и необязательный обработчик действия (добавить/удалить).
 
 Поля класса:
 `image: string`, `category: string`, `description: string` — отображение свойств товара.
@@ -321,6 +342,9 @@ error: string;
 
 Карточка товара в корзине.
 
+Конструктор:
+`constructor(container: HTMLElement, onDelete?: (id: string) => void)` — принимает контейнер и необязательный обработчик удаления позиции.
+
 Поля класса:
 `index: number` — порядковый номер позиции.
 
@@ -330,6 +354,9 @@ error: string;
 #### Класс Basket
 
 Вид корзины с итогом и кнопкой «Оформить».
+
+Конструктор:
+`constructor(container: HTMLElement, events: IEvents)` — принимает контейнер и брокер событий.
 
 Поля класса:
 `items: HTMLElement[]` — список позиций.
@@ -342,6 +369,9 @@ error: string;
 
 Базовая форма: общий блок ошибок и контроль submit.
 
+Конструктор:
+`constructor(container: HTMLElement, eventBroker: IEvents)` — принимает контейнер формы и брокер событий.
+
 Поля класса:
 `errors: string` — текст ошибок формы.
 `valid: boolean` — включает/выключает кнопку отправки.
@@ -352,6 +382,9 @@ error: string;
 #### Класс OrderDataForm (способ оплаты и адрес)
 
 Отвечает за ввод адреса и выбор способа оплаты.
+
+Конструктор:
+`constructor(container: HTMLElement, eventBroker: IEvents)` — принимает контейнер формы и брокер событий.
 
 Поля класса:
 `payment: "cash" | "card" | ""` — активирует выбранную кнопку.
@@ -366,6 +399,9 @@ Submit формы — событие `cart:fill-contacts`.
 
 Отвечает за ввод email и телефона.
 
+Конструктор:
+`constructor(container: HTMLElement, eventBroker: IEvents)` — принимает контейнер формы и брокер событий.
+
 Поля класса:
 `valid`, `errors` — управление доступностью submit и вывод ошибок.
 
@@ -377,6 +413,9 @@ Submit формы — событие `order:submit`.
 #### Класс SuccessOrderForm (успешный заказ)
 
 Показывает сумму списания и кнопку возврата к покупкам.
+
+Конструктор:
+`constructor(container: HTMLElement, eventBroker: IEvents)` — принимает контейнер формы и брокер событий.
 
 Поля класса:
 `total: number` — итог заказа.

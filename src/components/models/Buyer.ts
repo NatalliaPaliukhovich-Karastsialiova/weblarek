@@ -80,4 +80,16 @@ export class Buyer implements IBuyer {
       payment: this._payment !== ""
     };
   }
+
+  getOrderValidation(): { valid: boolean; error: string } {
+    const v = this.isValid();
+    const valid = v.address && v.payment;
+    return { valid, error: valid ? "" : "Выберите оплату и введите адрес" };
+  }
+
+  getContactsValidation(): { valid: boolean; error: string } {
+    const v = this.isValid();
+    const valid = v.email && v.phone;
+    return { valid, error: valid ? "" : "Введите корректные Email и телефон" };
+  }
 }

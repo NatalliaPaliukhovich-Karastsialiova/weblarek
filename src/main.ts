@@ -114,11 +114,9 @@ function openOrderForm() {
   const orderContent = new OrderDataForm(orderTpl, eventBroker);
   orderContent.address = buyer.userInfo.address;
   orderContent.payment = buyer.userInfo.payment;
-  const validity = buyer.isValid();
-  orderContent.valid = validity.address && validity.payment;
-  orderContent.errors = !orderContent.valid
-    ? "Выберите оплату и введите адрес"
-    : "";
+  const v = buyer.getOrderValidation();
+  orderContent.valid = v.valid;
+  orderContent.errors = v.error;
   modalView.content = orderContent.render();
   modalView.open();
 }
@@ -126,11 +124,9 @@ function openOrderForm() {
 function openContactsForm() {
   const contactsTpl = cloneTemplate<HTMLElement>(tplContacts);
   const contactsContent = new ContactDataForm(contactsTpl, eventBroker);
-  const validity = buyer.isValid();
-  contactsContent.valid = validity.email && validity.phone;
-  contactsContent.errors = !contactsContent.valid
-    ? "Введите корректные Email и телефон"
-    : "";
+  const v = buyer.getContactsValidation();
+  contactsContent.valid = v.valid;
+  contactsContent.errors = v.error;
   modalView.content = contactsContent.render();
   modalView.open();
 }
@@ -138,20 +134,19 @@ function openContactsForm() {
 function validateAndUpdateActiveForm() {
   const isOrderFormOpen = !!modalContainer.querySelector('form[name="order"]');
   const isContactsFormOpen = !!modalContainer.querySelector('form[name="contacts"]');
-  const validity = buyer.isValid();
   if (isOrderFormOpen) {
     const orderFormEl = modalContainer.querySelector('form[name="order"]')!;
     const orderForm = new OrderDataForm(orderFormEl as unknown as HTMLElement, eventBroker);
-    const ok = validity.address && validity.payment;
-    orderForm.valid = ok;
-    orderForm.errors = ok ? "" : "Выберите оплату и введите адрес";
+    const v = buyer.getOrderValidation();
+    orderForm.valid = v.valid;
+    orderForm.errors = v.error;
   }
   if (isContactsFormOpen) {
     const contactsFormEl = modalContainer.querySelector('form[name="contacts"]')!;
     const contactsForm = new ContactDataForm(contactsFormEl as unknown as HTMLElement, eventBroker);
-    const ok = validity.email && validity.phone;
-    contactsForm.valid = ok;
-    contactsForm.errors = ok ? "" : "Введите корректные Email и телефон";
+    const v = buyer.getContactsValidation();
+    contactsForm.valid = v.valid;
+    contactsForm.errors = v.error;
   }
 }
 
